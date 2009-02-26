@@ -59,13 +59,13 @@ module OpenSocial #:nodoc:
     # request. When data is returned, it is parsed as JSON after being
     # optionally unescaped.
     def send_request(service, guid, selector = nil, pid = nil,
-                     unescape = false)
+                     unescape = false, extra_fields = {})
       if !@connection
         raise RequestException.new('Request requires a valid connection.')
       end
       
       uri = @connection.service_uri(@connection.container[:rest] + service,
-                                    guid, selector, pid)
+                                    guid, selector, pid, extra_fields)
       data = dispatch(uri)
       
       if unescape

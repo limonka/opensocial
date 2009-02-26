@@ -96,7 +96,7 @@ module OpenSocial #:nodoc:
     
     # Constructs a URI to the OpenSocial endpoint given a service, guid,
     # selector, and pid.
-    def service_uri(service, guid, selector, pid)
+    def service_uri(service, guid, selector, pid, extra_fields = {})
       uri = [@container[:endpoint], service, guid, selector, pid].compact.
               join('/')
       
@@ -105,6 +105,11 @@ module OpenSocial #:nodoc:
       elsif @auth == AUTH_ST
         uri << '?st=' + self.st
       end
+
+      extra_fields.each do |name, value|
+        uri << "&#{name}=#{value}"
+      end
+      
       URI.parse(uri)
     end
     
