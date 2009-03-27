@@ -30,7 +30,7 @@ require 'uri'
 
 module OAuth::RequestProxy #:nodoc: all
   class ActionControllerRequest < OAuth::RequestProxy::Base
-    proxies ActionController::AbstractRequest
+    proxies ActionController::Request
  
     def method
       request.method.to_s.upcase
