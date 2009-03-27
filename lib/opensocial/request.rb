@@ -112,8 +112,8 @@ module OpenSocial #:nodoc:
                HoptoadNotifier.notify(
                  :error_class => "Myspace API Auth error",
                  :error_message => "Myspace API Auth error",
-                 :request => {:body => resp.body,
-                              :uri => req_uri.to_s})
+                 :request => {:params => {:body => resp.body,
+                                          :uri => req_uri.to_s}})
           raise AuthException.new('The request lacked proper authentication ' +
                                   'credentials to retrieve data.')
         else
