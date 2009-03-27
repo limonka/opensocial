@@ -160,7 +160,7 @@ module OpenSocial #:nodoc:
     # Sends the request, passing in the appropriate SERVICE and specified
     # instance variables.
     def send
-      json = send_request(SERVICE, @guid, @selector, @extra_fields)
+      json = send_request(SERVICE, @guid, @selector, nil, false, @extra_fields)
 
       return parse_response(json['entry'])
     end
