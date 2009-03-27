@@ -108,6 +108,7 @@ class PersonTest < Test::Unit::TestCase #:nodoc:
   end
 
   def test_sends_extra_parameter
+    
     c = OpenSocial::Connection.new(NO_AUTH)
     json = load_json('people.json')
 
