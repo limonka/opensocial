@@ -106,4 +106,13 @@ class PersonTest < Test::Unit::TestCase #:nodoc:
     assert !second.is_owner
     assert !second.is_viewer
   end
+
+  def test_sends_extra_parameter
+    c = OpenSocial::Connection.new(NO_AUTH)
+    json = load_json('people.json')
+
+    request = OpenSocial::FetchPeopleRequest.new(c, "@me", "@friends", :count => 500)
+    request.expects(:send_request).with('people', '@me', '@friends', {:count => 500}).returns(json)
+    people = request.send
+  end
 end

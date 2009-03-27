@@ -24,7 +24,7 @@
 
 require 'rubygems'
 require 'active_support'
-require 'action_controller/request'
+require 'action_controller'
 require 'oauth/request_proxy/base'
 require 'uri'
 
