@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'hoptoad-notifier'
+require 'hoptoad_notifier'
 
 module OpenSocial #:nodoc:
 
