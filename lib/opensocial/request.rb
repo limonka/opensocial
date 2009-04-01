@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'hoptoad_notifier'
-
 module OpenSocial #:nodoc:
 
   # Provides a wrapper for a single request to an OpenSocial endpoint, either
