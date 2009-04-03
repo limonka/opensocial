@@ -123,7 +123,7 @@ class PersonTest < Test::Unit::TestCase #:nodoc:
     json = load_json('person.json')
 
     request = OpenSocial::FetchPersonRequest.new(c)
-    expected_fields_requested = "id,dateOfBirth,name,emails,gender,state,postalCode,ethnicity,relationshipStatus,nickname"
+    expected_fields_requested = "id,dateOfBirth,name,emails,gender,state,postalCode,ethnicity,relationshipStatus,thumbnailUrl,nickname"
     request.expects(:send_request).with('people', '@me', '@self', nil, false, :fields => expected_fields_requested).returns(json)
     people = request.send
   end
