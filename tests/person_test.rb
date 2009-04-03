@@ -116,4 +116,17 @@ class PersonTest < Test::Unit::TestCase #:nodoc:
     request.expects(:send_request).with('people', '@me', '@friends', nil, false, {:count => 500}).returns(json)
     people = request.send
   end
+  
+  # Tests construction of a person from a stubbed HTTP request
+  def test_fetch_person_request_asks_for_nickname
+    c = OpenSocial::Connection.new(NO_AUTH)
+    json = load_json('person.json')
+
+    request = OpenSocial::FetchPersonRequest.new(c)
+    expected_fields_requested = "id,dateOfBirth,name,emails,gender,state,postalCode,ethnicity,relationshipStatus,nickname"
+    request.expects(:send_request).with('people', '@me', '@self', nil, false, :fields => expected_fields_requested).returns(json)
+    people = request.send
+  end
+  
+
 end
