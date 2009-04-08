@@ -101,7 +101,7 @@ module OpenSocial #:nodoc:
     # Sends the request, passing in the appropriate SERVICE and specified
     # instance variables.
     def send
-      fields_we_want = [:id, :dateOfBirth, :name, :emails, :gender, :state, :postalCode, :ethnicity, :relationshipStatus, :thumbnailUrl, :nickname]
+      fields_we_want = [:id, :dateOfBirth, :name, :emails, :gender, :state, :postalCode, :ethnicity, :relationshipStatus, :thumbnailUrl, :displayName]
       json = send_request(SERVICE, @guid, @selector, nil, false, :fields => fields_we_want.join(","))
 
       return parse_response(json['entry'])
