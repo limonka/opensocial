@@ -90,6 +90,7 @@ module OpenSocial #:nodoc:
     # Defines the service fragment for use in constructing the request URL or
     # JSON
     SERVICE = 'people'
+    DEFAULT_FIELDS = [:id, :dateOfBirth, :name, :emails, :gender, :state, :postalCode, :ethnicity, :relationshipStatus, :thumbnailUrl, :displayName]
 
     # Initializes a request to the specified user, or the default (@me, @self).
     # A valid Connection is not necessary if the request is to be used as part
@@ -101,8 +102,7 @@ module OpenSocial #:nodoc:
     # Sends the request, passing in the appropriate SERVICE and specified
     # instance variables.
     def send
-      fields_we_want = [:id, :dateOfBirth, :name, :emails, :gender, :state, :postalCode, :ethnicity, :relationshipStatus, :thumbnailUrl, :displayName]
-      json = send_request(SERVICE, @guid, @selector, nil, false, :fields => fields_we_want.join(","))
+      json = send_request(SERVICE, @guid, @selector, nil, false, :fields => DEFAULT_FIELDS.join(","))
 
       return parse_response(json['entry'])
     end
@@ -160,6 +160,7 @@ module OpenSocial #:nodoc:
     # Sends the request, passing in the appropriate SERVICE and specified
     # instance variables.
     def send
+      @extra_fields[:fields] ||= FetchPersonRequest::DEFAULT_FIELDS.join(",")
       json = send_request(SERVICE, @guid, @selector, nil, false, @extra_fields)
 
       return parse_response(json['entry'])

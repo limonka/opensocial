@@ -107,11 +107,13 @@ module OpenSocial #:nodoc:
     def check_for_http_error!(resp, req_uri=nil) # TODO uri for debugging only
            if !resp.kind_of?(Net::HTTPSuccess)
              if resp.is_a?(Net::HTTPUnauthorized)
-               HoptoadNotifier.notify(
-                 :error_class => "Myspace API Auth error",
-                 :error_message => "Myspace API Auth error",
-                 :request => {:params => {"body" => resp.body,
-                                          "uri" => req_uri.to_s}})
+               if Object.const_defined?(:HoptoadNotifier)
+                 HoptoadNotifier.notify(
+                   :error_class => "Myspace API Auth error",
+                   :error_message => "Myspace API Auth error",
+                   :request => {:params => {"body" => resp.body,
+                                            "uri" => req_uri.to_s}})
+               end
           raise AuthException.new('The request lacked proper authentication ' +
                                   'credentials to retrieve data.')
         else
