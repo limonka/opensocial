@@ -19,7 +19,6 @@ require 'uri'
 # opensocial/auth. This gem adds standard to_json behavior for the
 # request classes, instead of using ActiveSupport.
 require 'rubygems'
-require 'json/add/rails'
 
 
 module OpenSocial #:nodoc:
