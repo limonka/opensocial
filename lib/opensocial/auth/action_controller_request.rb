@@ -24,13 +24,18 @@
 
 require 'rubygems'
 require 'active_support'
-require 'action_controller'
-require 'oauth/request_proxy/base'
+require 'oauth/request_proxy/action_controller_request'
 require 'uri'
 
 module OAuth::RequestProxy #:nodoc: all
   class ActionControllerRequest < OAuth::RequestProxy::Base
-    proxies ActionController::Request
+    # proxies ActionController::AbstractRequest
+    if ActionController.const_defined?(:AbstractRequest)
+      proxies ActionController::AbstractRequest
+    else
+      proxies ActionController::Request
+    end
+
  
     def method
       request.method.to_s.upcase
