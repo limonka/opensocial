@@ -130,7 +130,7 @@ module OpenSocial #:nodoc:
         rc = json['code']
         message = json['message']
         case rc
-        when 401:
+        when 401
           raise AuthException.new('The request lacked proper authentication ' +
                                   'credentials to retrieve data.')
         else

@@ -32,6 +32,8 @@ module OAuth::RequestProxy #:nodoc: all
     # proxies ActionController::AbstractRequest
     if ActionController.const_defined?(:AbstractRequest)
       proxies ActionController::AbstractRequest
+    elsif ActionDispatch.const_defined?(:Request)
+      proxies ActionDispatch::Request
     else
       proxies ActionController::Request
     end
