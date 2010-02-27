@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
-  s.name = %q{drogus-opensocial}
-  s.version = "0.0.2"
+  s.name = %q{rails3-opensocial}
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Google"]
@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{opensocial}
   s.rubygems_version = %q{1.2.0}
   s.summary = %q{OpenSocial Google Gem. Gemified by Robert R Evans}
-  s.add_dependency "oauth"
+  s.add_dependency "drogus-oauth"
   s.add_dependency "json"
-  s.add_dependency "activesupport"
-  s.add_dependency "actionpack"
+  s.add_dependency "activesupport", ">= 3.0.0.beta"
+  s.add_dependency "actionpack", ">= 3.0.0.beta"
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
