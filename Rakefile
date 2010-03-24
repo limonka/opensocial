@@ -6,7 +6,7 @@ require "rake"
 begin
   require "jeweler"
   Jeweler::Tasks.new do |gem|
-    gem.name = "opensocial"
+    gem.name = "qoobaa-opensocial"
     gem.summary = %Q{OpenSocial Google Gem}
     gem.description = %Q{OpenSocial Google Gem}
     gem.email = "qoobaa@gmail.com"
