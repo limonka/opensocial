@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
      "lib/opensocial/request.rb",
      "lib/opensocial/string/merb_string.rb",
      "lib/opensocial/string/os_string.rb",
+     "qoobaa-opensocial.gemspec",
      "test/fixtures/activities.json",
      "test/fixtures/activity.json",
      "test/fixtures/appdata.json",
