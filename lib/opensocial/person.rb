@@ -20,7 +20,6 @@
 #                        by describing their relationship to a single person.
 #
 
-
 module OpenSocial #:nodoc:
 
   # Acts as a wrapper for an OpenSocial person.
@@ -31,7 +30,6 @@ module OpenSocial #:nodoc:
   # to the value. Each value is stored in the attr_accessor, either as a
   # String, Fixnum, Hash, or Array.
   #
-
 
   class Person < Base
 
@@ -54,24 +52,24 @@ module OpenSocial #:nodoc:
     # Returns the complete name of the Person, to the best ability, given
     # available fields.
     def long_name
-      if @name && @name['givenName'] && @name['familyName']
-        return @name['givenName'] + ' ' + @name['familyName']
+      if @name && @name["givenName"] && @name["familyName"]
+        return @name["givenName"] + " " + @name["familyName"]
       elsif @nickname
         return @nickname
       else
-        return ''
+        return ""
       end
     end
 
     # Returns the first name or nickname of the Person, to the best ability,
     # given available fields.
     def short_name
-      if @name && @name['givenName']
-        return @name['givenName']
+      if @name && @name["givenName"]
+        return @name["givenName"]
       elsif @nickname
         return @nickname
       else
-        return ''
+        return ""
       end
     end
   end
@@ -81,21 +79,20 @@ module OpenSocial #:nodoc:
   # The FetchPeopleRequests wraps a simple request to an OpenSocial
   # endpoint for a single person. As parameters, it accepts a user ID and
   # selector and optionally an ID of a particular person, in order to display
-  # the user ID's view of that person. This request may be used, standalone,
+  # the user ID"s view of that person. This request may be used, standalone,
   # by calling send, or bundled into an RpcRequest.
   #
-
 
   class FetchPersonRequest < Request
     # Defines the service fragment for use in constructing the request URL or
     # JSON
-    SERVICE = 'people'
+    SERVICE = "people"
     DEFAULT_FIELDS = [:id, :dateOfBirth, :name, :emails, :gender, :state, :postalCode, :ethnicity, :relationshipStatus, :thumbnailUrl, :displayName]
 
     # Initializes a request to the specified user, or the default (@me, @self).
     # A valid Connection is not necessary if the request is to be used as part
     # of an RpcRequest.
-    def initialize(connection = nil, guid = '@me', selector = '@self')
+    def initialize(connection = nil, guid = "@me", selector = "@self")
       super
     end
 
@@ -104,25 +101,25 @@ module OpenSocial #:nodoc:
     def send
       json = send_request(SERVICE, @guid, @selector, nil, false, :fields => DEFAULT_FIELDS.join(","))
 
-      return parse_response(json['entry'])
+      return parse_response(json["entry"])
     end
 
     # Selects the appropriate fragment from the JSON response in order to
     # create a native object.
     def parse_rpc_response(response)
-      return parse_response(response['data'])
+      return parse_response(response["data"])
     end
 
     # Converts the request into a JSON fragment that can be used as part of a
     # larger RpcRequest.
     def to_json(*a)
       value = {
-        'method' => SERVICE + GET,
-        'params' => {
-          'userId' => ["#{@guid}"],
-          'groupId' => "#{@selector}"
+        "method" => SERVICE + GET,
+        "params" => {
+          "userId" => ["#{@guid}"],
+          "groupId" => "#{@selector}"
         },
-        'id' => @key
+        "id" => @key
       }.to_json(*a)
     end
 
@@ -143,16 +140,15 @@ module OpenSocial #:nodoc:
   #  send, or bundled into an RpcRequest.
   #
 
-
   class FetchPeopleRequest < Request
     # Defines the service fragment for use in constructing the request URL or
     # JSON
-    SERVICE = 'people'
+    SERVICE = "people"
 
     # Initializes a request to the specified user's group, or the default (@me,
     # @friends). A valid Connection is not necessary if the request is to be
     # used as part of an RpcRequest.
-    def initialize(connection = nil, guid = '@me', selector = '@friends', extra_fields = {})
+    def initialize(connection = nil, guid = "@me", selector = "@friends", extra_fields = {})
       super
       @extra_fields = extra_fields
     end
@@ -163,25 +159,25 @@ module OpenSocial #:nodoc:
       @extra_fields[:fields] ||= FetchPersonRequest::DEFAULT_FIELDS.join(",")
       json = send_request(SERVICE, @guid, @selector, nil, false, @extra_fields)
 
-      return parse_response(json['entry'])
+      return parse_response(json["entry"])
     end
 
     # Selects the appropriate fragment from the JSON response in order to
     # create a native object.
     def parse_rpc_response(response)
-      return parse_response(response['data']['list'])
+      return parse_response(response["data"]["list"])
     end
 
     # Converts the request into a JSON fragment that can be used as part of a
     # larger RPC request.
     def to_json(*a)
       value = {
-        'method' => SERVICE + GET,
-        'params' => {
-          'userId' => ["#{@guid}"],
-          'groupId' => "#{@selector}"
+        "method" => SERVICE + GET,
+        "params" => {
+          "userId" => ["#{@guid}"],
+          "groupId" => "#{@selector}"
         },
-        'id' => @key
+        "id" => @key
       }.to_json(*a)
     end
 

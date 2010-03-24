@@ -27,7 +27,7 @@ module OpenSocial #:nodoc:
 
 
   class Request
-    GET = '.get'
+    GET = ".get"
 
     # Defines the connection that will be used in the request.
     attr_accessor :connection
@@ -60,7 +60,7 @@ module OpenSocial #:nodoc:
     def send_request(service, guid, selector = nil, pid = nil,
                      unescape = false, extra_fields = {})
       if !@connection
-        raise RequestException.new('Request requires a valid connection.')
+        raise RequestException.new("Request requires a valid connection.")
       end
 
       uri = @connection.service_uri(@connection.container[:rest] + service,
@@ -84,7 +84,13 @@ module OpenSocial #:nodoc:
 
       if post_data
         req = Net::HTTP::Post.new(uri.request_uri)
-        req.set_form_data(post_data)
+
+        # FIXME: post_data is a serialized JSON string - set_form_data
+        # requires a hash, using body= method instead (doesn't work as
+        # well)
+
+        # req.set_form_data(post_data)
+        req.body = post_data
       else
         req = Net::HTTP::Get.new(uri.request_uri)
       end
@@ -96,7 +102,7 @@ module OpenSocial #:nodoc:
         check_for_json_error!(resp)
       else
         resp = http.get(req.path)
-        check_for_http_error!(resp, uri) # TODO uri for debugging only        
+        check_for_http_error!(resp, uri) # TODO uri for debugging only
       end
 
       return resp.body
@@ -114,8 +120,8 @@ module OpenSocial #:nodoc:
                    :request => {:params => {"body" => resp.body,
                                             "uri" => req_uri.to_s}})
                end
-          raise AuthException.new('The request lacked proper authentication ' +
-                                  'credentials to retrieve data.')
+          raise AuthException.new("The request lacked proper authentication " +
+                                  "credentials to retrieve data.")
         else
           resp.value
         end
@@ -126,13 +132,13 @@ module OpenSocial #:nodoc:
     # exception is raised.
     def check_for_json_error!(resp)
       json = JSON.parse(resp.body)
-      if json.is_a?(Hash) && json.has_key?('code') && json.has_key?('message')
-        rc = json['code']
-        message = json['message']
+      if json.is_a?(Hash) && json.has_key?("code") && json.has_key?("message")
+        rc = json["code"]
+        message = json["message"]
         case rc
         when 401
-          raise AuthException.new('The request lacked proper authentication ' +
-                                  'credentials to retrieve data.')
+          raise AuthException.new("The request lacked proper authentication " +
+                                  "credentials to retrieve data.")
         else
           raise RequestException.new("The request returned an unsupported " +
                                      "status code: #{rc} #{message}.")
@@ -178,8 +184,8 @@ module OpenSocial #:nodoc:
     # thrown. The response JSON is optionally unescaped (defaulting to true).
     def send(unescape = true)
       if @requests.length == 0
-        raise RequestException.new('RPC request requires a non-empty hash ' +
-                                   'of requests in order to be sent.')
+        raise RequestException.new("RPC request requires a non-empty hash " +
+                                   "of requests in order to be sent.")
       end
 
       json = send_request(request_json, unescape)
@@ -225,7 +231,7 @@ module OpenSocial #:nodoc:
     def key_by_id(data)
       keyed_by_id = {}
       for entry in data
-        keyed_by_id.merge!({entry['id'] => entry})
+        keyed_by_id.merge!({entry["id"] => entry})
       end
 
       return keyed_by_id

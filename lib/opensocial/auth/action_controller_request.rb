@@ -22,11 +22,6 @@
 # Includes modifications by Robin Luckey from:
 # http://github.com/robinluckey/oauth/tree/master/lib%2Foauth%2Frequest_proxy%2Faction_controller_request.rb
 
-require "rubygems"
-require "active_support"
-require "oauth/request_proxy/action_controller_request"
-require "uri"
-
 module OAuth::RequestProxy #:nodoc: all
   class ActionControllerRequest < OAuth::RequestProxy::Base
     if defined?(ActionDispatch::Request)

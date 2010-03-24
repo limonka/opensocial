@@ -12,19 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(File.expand_path(File.dirname(__FILE__))) unless $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+require "active_support"
+require "oauth"
+require "oauth/consumer"
+require "oauth/request_proxy/action_controller_request"
+require "uri"
 
+require "opensocial/base"
+require "opensocial/request"
+require "opensocial/activity"
+require "opensocial/appdata"
 require "opensocial/auth/action_controller_request"
 require "opensocial/auth/base"
+require "opensocial/connection"
+require "opensocial/group"
+require "opensocial/person"
 require "opensocial/string/merb_string"
 require "opensocial/string/os_string"
-require "opensocial/base"
-require "opensocial/connection"
-require "opensocial/request"
-require "opensocial/person"
-require "opensocial/appdata"
-require "opensocial/activity"
-require "opensocial/group"
 
 module Opensocial
   Version = "0.1.0"

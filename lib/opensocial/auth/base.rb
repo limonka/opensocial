@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rubygems"
-require "oauth"
-require "oauth/consumer"
-
 module OpenSocial #:nodoc:
 
   # Provides helper classes to be used in verifying and validating the user.
