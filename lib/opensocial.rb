@@ -29,8 +29,3 @@ require "opensocial/group"
 require "opensocial/person"
 require "opensocial/string/merb_string"
 require "opensocial/string/os_string"
-
-module Opensocial
-  Version = "0.1.0"
-end
-

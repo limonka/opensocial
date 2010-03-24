@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 require "rubygems"
 require "rake"
 
@@ -6,14 +7,15 @@ begin
   require "jeweler"
   Jeweler::Tasks.new do |gem|
     gem.name = "opensocial"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{OpenSocial Google Gem}
+    gem.description = %Q{OpenSocial Google Gem}
     gem.email = "qoobaa@gmail.com"
     gem.homepage = "http://github.com/qoobaa/opensocial"
-    gem.authors = ["Jakub Kuźma"]
+    gem.authors = ["Jakub Kuźma", "Piotr Sarnacki"]
     gem.add_dependency "oauth"
     gem.add_development_dependency "test-unit", ">= 2"
     gem.add_development_dependency "json_pure"
+    gem.add_development_dependency "mocha"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

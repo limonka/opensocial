@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "rubygems"
+gem "test-unit"
 require "test/unit"
 require "mocha"
 require "json/pure"
