@@ -33,7 +33,7 @@ module OAuth::RequestProxy #:nodoc: all
     end
 
     def method
-      request.method.to_s.upcase
+      (request.env["rack.methodoverride.original_method"] || request.method).to_s.upcase
     end
 
     def uri
