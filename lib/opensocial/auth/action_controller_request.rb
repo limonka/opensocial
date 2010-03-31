@@ -71,7 +71,7 @@ module OAuth::RequestProxy #:nodoc: all
         end
       end
 
-      params.join("&").split("&").reject { |kv| kv =~ /^oauth_signature=.*/}.reject { |kv| kv =~ /^container=.*/ }.reject(&:blank?).map { |p| p.split("=", 2) }.uniq
+      params.join("&").split("&").reject { |kv| kv =~ /^oauth_signature=.*/}.reject(&:blank?).map { |p| p.split("=", 2) }.uniq
     end
 
     protected
