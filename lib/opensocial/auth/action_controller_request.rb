@@ -64,7 +64,9 @@ module OAuth::RequestProxy #:nodoc: all
         params << CGI.unescape(request.query_string) unless request.query_string.blank?
         if request.content_type == Mime::Type.lookup("application/x-www-form-urlencoded")
           if request.env["rack.formunencoder.original_input"]
-            params << CGI.unescape(request.env["rack.formunencoder.original_input"].read)
+            raw_post_data = request.env["rack.formunencoder.original_input"].read
+            request.env["rack.formunencoder.original_input"].rewind if request.env["rack.formunencoder.original_input"].respond_to?(:rewind)
+            params << CGI.unescape(raw_post_data)
           else
             params << CGI.unescape(request.raw_post)
           end
