@@ -63,7 +63,7 @@ module OAuth::RequestProxy #:nodoc: all
         params << header_params.to_query
         params << CGI.unescape(request.query_string) unless request.query_string.blank?
         if request.content_type == Mime::Type.lookup("application/x-www-form-urlencoded")
-          params << CGI.unescape(request.raw_post)
+          params << CGI.unescape(request.env["rack.formunencoder.original_input"] || request.raw_post)
         end
       end
 
